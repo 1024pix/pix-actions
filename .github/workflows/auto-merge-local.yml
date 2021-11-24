@@ -18,3 +18,5 @@ on:
 jobs:
   automerge:
     uses: "1024pix/pix-actions/.github/workflows/auto-merge.yml@ebf09e53d9d0bed3135b1718fc89fd0376de7fe4"
+    secrets:
+      auto_merge_token: "${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}"

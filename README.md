@@ -10,7 +10,7 @@ L'ajout de ce label permet de démarrer l'action GitHub d'`auto-merge` qui va se
 
 ### Utilisation
 :warning: WIP, la version `v1` n'est pas encore disponible.
-La liste des triggers permettant de déclancher l'action est à rediscuter.
+La liste des triggers permettant de déclencher l'action est à rediscuter.
 
 Ne pas oublier de définir le secret `PIX_SERVICE_ACTIONS_TOKEN`.
 

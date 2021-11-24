@@ -6,7 +6,7 @@ Chez Pix, nous aimons les labels GitHub. Après notre process de review et quand
 
 > `:rocket: Ready to merge` :rocket:
 
-L'ajout de ce label permet de démarrer l'action GitHub d'`auto-merge` qui va se débrouiller pour rebase la branche de la PR et la merger si tous les validations automatisées (tests auto...) sont au vert.
+L'ajout de ce label permet de démarrer l'action GitHub d'`auto-merge` qui va se débrouiller pour rebase la branche de la PR et la merger si toutes les validations automatisées (tests auto...) sont au vert.
 
 ### Utilisation
 :warning: WIP, la version `v1` n'est pas encore disponible.

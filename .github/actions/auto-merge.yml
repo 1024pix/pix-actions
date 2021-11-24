@@ -1,4 +1,5 @@
 name: automerge check
+
 on:
   workflow_call:
     inputs:

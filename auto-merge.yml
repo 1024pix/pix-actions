@@ -23,6 +23,8 @@ on:
 
 jobs:
   automerge:
+    if: >
+      ${{ contains(github.event.pull_request.labels.*.name, inputs.update_labels) }}
     runs-on: ubuntu-latest
     steps:
       - name: automerge

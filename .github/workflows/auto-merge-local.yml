@@ -1,0 +1,22 @@
+name: automerge check
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+  status:
+    types:
+      - success
+
+jobs:
+  automerge:
+    uses: "1024pix/pix-actions/.github/workflows/auto-merge.yml@ebf09e53d9d0bed3135b1718fc89fd0376de7fe4"
+    secrets:
+      auto_merge_token: "${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}"

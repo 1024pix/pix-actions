@@ -14,7 +14,6 @@ on:
 
 jobs:
   automerge:
-    runs-on: ubuntu-latest
     steps:
       - uses: 1024pix/pix-actions/auto-merge@6575d94a9672fa3573470a1bed8e7dce0315f60f
         with:

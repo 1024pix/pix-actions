@@ -25,9 +25,6 @@ on:
     types:
       - labeled
       - unlabeled
-  pull_request_review:
-    types:
-      - submitted
   check_suite:
     types:
       - completed

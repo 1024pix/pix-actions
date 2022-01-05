@@ -1,0 +1,43 @@
+name: automerge check
+description: >-
+  Autorebase and merge a PR using the PR title as commit message when these conditions are met:
+  1. The `:rocket: Ready to Merge` tag is set
+  2. None of these flags are set: `:warning: Blocked`, `:earth_africa: i18n needed`, `:busts_in_silhouette: Panel Review Needed`, `Development in progress`, `:eyes: Design Review Needed`, `:eyes: Func Review Needed`, `:eyes: Tech Review Needed`
+
+os: ubuntu-latest
+
+inputs:
+  merge_labels:
+    type: string
+    default: ':rocket: Ready to Merge,!:warning: Blocked,!:earth_africa: i18n needed,!:busts_in_silhouette: Panel Review Needed,!Development in progress,!:eyes: Design Review Needed,!:eyes: Func Review Needed,!:eyes: Tech Review Needed'
+  merge_commit_message: 
+    type: string
+    default: pull-request-title
+  update_labels: 
+    type: string
+    default: ':rocket: Ready to Merge'
+  update_method: 
+    type: string
+    default: rebase
+  merge_forks: 
+    type: string
+    default: 'false'
+
+secrets:
+  auto_merge_token:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: automerge
+      uses: pascalgn/automerge-action@v0.14.3
+      if: >
+        ${{ contains(github.event.pull_request.labels.*.name, inputs.update_labels) }}
+      env:
+        GITHUB_TOKEN: '${{ secrets.auto_merge_token }}'
+        MERGE_LABELS: '${{ inputs.merge_labels }}'
+        MERGE_COMMIT_MESSAGE: '${{ inputs.merge_commit_message }}'
+        UPDATE_LABELS: '${{ inputs.update_labels }}'
+        UPDATE_METHOD: '${{ inputs.update_method }}'
+        MERGE_FORKS: '${{ inputs.merge_forks }}'

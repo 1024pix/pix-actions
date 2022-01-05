@@ -37,7 +37,7 @@ on:
 
 jobs:
   automerge:
-    uses: "1024pix/pix-actions/.github/workflows/auto-merge.yml@v1"
+    uses: "1024pix/pix-actions/.github/workflows/auto-merge.yml@v0.1.0"
     secrets:
       auto_merge_token: "${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}"
 ```

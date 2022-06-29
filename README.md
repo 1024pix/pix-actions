@@ -54,7 +54,7 @@ Voir https://github.com/1024pix/notify-team-on-config-file-change
 Ces actions concernent les déplacements de tickets Jira automatisés. Elles se basent sur la présence du nom d'un ticket (`PIX-1234`) dans le titre de la PR.
 
 ### Déplacement d'un ticket [de `ToDo` à `Doing`](https://github.com/1024pix/pix/blob/dev/.github/workflows/jira-transition-to-dev-in-progress.yaml)
-Cette action est uniquement trigger lors de la création de la PR.
+Cette action est uniquement déclenchée lors de la création de la PR.
 
 ```
 name: Move JIRA ticket to Doing
@@ -93,7 +93,7 @@ jobs:
 ```
 
 ### Déplacement d'un ticket [de `Doing` à `Review`](https://github.com/1024pix/pix/blob/dev/.github/workflows/jira-transition-to-review.yaml)
-Cette action est trigger lors de l'ajout d'un label sur une PR. Le ticket passe en `Review` si le label `:eyes: Tech Review Needed` est ajouté.
+Cette action est déclenchée lors de l'ajout d'un label sur une PR. Le ticket passe en `Review` si le label `:eyes: Tech Review Needed` est ajouté.
 
 ```
 name: Move JIRA ticket to Func review
@@ -134,7 +134,7 @@ jobs:
 ```
 
 ### Déplacement d'un ticket [de `Review` à `Intégration`](https://github.com/1024pix/pix/blob/dev/.github/workflows/on-dev-merge.yaml)
-Cette action est trigger au push sur dev (= une fois que la PR a été mergée).
+Cette action est déclenchée au push sur dev (= une fois que la PR a été mergée).
 
 ```
 name: Merge on Dev

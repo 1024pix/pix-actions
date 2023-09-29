@@ -1,0 +1,17 @@
+name: Check Node version availability on Scalingo
+description: >-
+  Check if package.json node engine version is available on Scalingo
+
+os: ubuntu-latest
+
+inputs:
+  directory:
+    required: false
+    description: package.json parent directory to check node engine version availability
+    default: '.'
+
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/check-node-version-availability-on-scalingo.sh ${{ inputs.directory }}
+      shell: bash

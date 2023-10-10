@@ -6,7 +6,15 @@
     [
       "@semantic-release/commit-analyzer",
       {
-        "config": "@1024pix/conventional-changelog-pix"
+        "config": "@1024pix/conventional-changelog-pix",
+        "releaseRules": [
+          { tag: "BUGFIX", release: "patch" },
+          { tag: "BUMP", release: "patch" },
+          { tag: "DOC", release: "patch" },
+          { tag: "TECH", release: "patch" },
+          { tag: "FEATURE", release: "minor" },
+          { tag: "BREAKING_CHANGE", release: "major" },
+        ],
       }
     ],
     [

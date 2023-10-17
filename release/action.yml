@@ -29,15 +29,6 @@ runs:
       run: cp ${{ github.action_path }}/release.config.cjs ${{ github.workspace }}/release.config.cjs
       shell: bash
 
-    - name: Run build script
-      run: |
-        if [ -f "package.json" ] && jq -e '.scripts.build' package.json > /dev/null; then
-          npm run build
-        else
-          echo "Pas de script build dans le package.json"
-        fi
-      shell: bash
-
     - name: Semantic Release
       id: semantic
       uses: cycjimmy/semantic-release-action@v4

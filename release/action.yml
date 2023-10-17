@@ -22,14 +22,11 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: ${{ github.action_path }}/check-node-version-availability-on-scalingo.sh ${{ inputs.directory }}
-      shell: bash
-
     - name: Checkout
       uses: actions/checkout@v4
 
     - name: Copy release config in repo
-      run: cp ${{ github.action_path }}/release/release.config.js ${{ github.workspace }}/release.config.js
+      run: cp ${{ github.action_path }}/release.config.js ${{ github.workspace }}/release.config.js
       shell: bash
 
     - name: Semantic Release
@@ -44,12 +41,13 @@ runs:
         extends: |
           @1024pix/conventional-changelog-pix
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ env.NPM_TOKEN }}
         NPM_PUBLISH: ${{ inputs.npmPublish }}
 
     - name: Push updates to branch for major version
       if: steps.semantic.outputs.new_release_published == 'true' && inputs.updateMajorVersion == 'true'
       run: "git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}"
+      shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}

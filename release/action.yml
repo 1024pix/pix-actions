@@ -1,0 +1,55 @@
+name: Generate Changelog and Release
+description: >-
+    This workflow will generate a changelog and release a new version of the
+    project.
+
+os: ubuntu-latest
+
+inputs:
+  npmPublish:
+    required: false
+    description: >-
+      Whether to publish to npm or not. If set to false, the release will only
+      be created on GitHub.
+    default: false
+  updateMajorVersion:
+    required: false
+    description: >-
+      Whether to update the major version or not. If set to true, the major
+      version will be updated.
+    default: false
+
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/check-node-version-availability-on-scalingo.sh ${{ inputs.directory }}
+      shell: bash
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Copy release config in repo
+      run: cp ${{ github.action_path }}/release/release.config.js ${{ github.workspace }}/release.config.js
+      shell: bash
+
+    - name: Semantic Release
+      id: semantic
+      uses: cycjimmy/semantic-release-action@v4
+      with:
+        semantic_version: 22
+        extra_plugins: |
+          @semantic-release/changelog@6
+          @semantic-release/npm@10
+          @semantic-release/git@10
+        extends: |
+          @1024pix/conventional-changelog-pix
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_PUBLISH: ${{ inputs.npmPublish }}
+
+    - name: Push updates to branch for major version
+      if: steps.semantic.outputs.new_release_published == 'true' && inputs.updateMajorVersion == 'true'
+      run: "git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

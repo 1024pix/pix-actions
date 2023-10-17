@@ -1,3 +1,9 @@
+# [0.5.0](https://github.com/1024pix/pix-actions/compare/v0.4.2...v0.5.0) (2023-10-17)
+
+    ### Amélioration
+
+    -  **Gérer la tâche build dans l'action release** [FEATURE] Gérer la tâche build dans l'action release    -  **Supprimer la tâche de build** [FEATURE] Supprimer la tâche de build
+
 ## [0.4.2](https://github.com/1024pix/pix-actions/compare/v0.4.1...v0.4.2) (2023-10-17)
 
     ### Correction

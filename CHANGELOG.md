@@ -1,3 +1,9 @@
+## [0.4.2](https://github.com/1024pix/pix-actions/compare/v0.4.1...v0.4.2) (2023-10-17)
+
+    ### Correction
+
+    -  **Ajouter les branches dans la configuration de semantic-release** [BUGFIX] Ajouter les branches dans la configuration de semantic-release
+
 ## [0.4.1](https://github.com/1024pix/pix-actions/compare/v0.4.0...v0.4.1) (2023-10-17)
 
     ### Correction

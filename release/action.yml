@@ -39,7 +39,7 @@ runs:
           @semantic-release/npm@10
           @semantic-release/git@10
         extends: |
-          @1024pix/conventional-changelog-pix
+          @1024pix/conventional-changelog-pix@0.3.0
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ env.NPM_TOKEN }}

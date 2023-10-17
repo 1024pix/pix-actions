@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/1024pix/pix-actions/compare/v0.4.0...v0.4.1) (2023-10-17)
+
+    ### Correction
+
+    -  **Réparer l'action release dans un contexte ESM** [BUGFIX] Réparer l'action release dans un contexte ESM
+
 # [0.4.0](https://github.com/1024pix/pix-actions/compare/v0.3.1...v0.4.0) (2023-10-17)
 
     ### Amélioration

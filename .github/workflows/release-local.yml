@@ -1,4 +1,4 @@
-name: automerge check
+name: release
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  automerge:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: 1024pix/pix-actions/release@main

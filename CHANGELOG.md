@@ -1,3 +1,9 @@
+# [0.6.0](https://github.com/1024pix/pix-actions/compare/v0.5.0...v0.6.0) (2023-10-18)
+
+    ### Amélioration
+
+    -  **Permettre d'utiliser la version 1 du package conventional-changelog-pix** [FEATURE] Permettre d'utiliser la version 1 du package conventional-changelog-pix
+
 # [0.5.0](https://github.com/1024pix/pix-actions/compare/v0.4.2...v0.5.0) (2023-10-17)
 
     ### Amélioration

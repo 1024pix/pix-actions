@@ -12,6 +12,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - uses: 1024pix/pix-actions/release@main
         with:
           updateMajorVersion: true

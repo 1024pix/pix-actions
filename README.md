@@ -43,3 +43,32 @@ jobs:
 ```
 </details>
 
+## check-node-version-availability
+
+Chez Pix, nous utilisons le PaaS Scalingo, celui nous permet de déployer facilement nos applications.
+Nous utilisons également Renovate pour mettre à jour nos dépendances dont NodeJS.
+Cependant, Scalingo ne propose pas toujours la dernière version de NodeJS,
+ce qui peut poser des problèmes lors du build sur Scalingo.
+
+Pour éviter cela, nous utilisons l'action `check-node-version-availability` qui permet de vérifier si la version
+de NodeJS est disponible chez Scalingo.
+
+### Utilisation
+
+<details>
+  <summary><code>.github/workflows/check-node-version-availability.yml</code></summary>
+
+name: Check node version availability on Scalingo
+
+on: [push]
+
+jobs:
+  check-node-compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - uses: 1024pix/pix-actions/check-node-version-availability-on-scalingo@v0
+```
+

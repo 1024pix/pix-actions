@@ -1,3 +1,9 @@
+## [0.7.1](https://github.com/1024pix/pix-actions/compare/v0.7.0...v0.7.1) (2023-10-18)
+
+### :bug: Correction
+
+- Revert: Ajouter le numéro de PR dans la description du commit de merge
+
 # [0.7.0](https://github.com/1024pix/pix-actions/compare/v0.6.1...v0.7.0) (2023-10-18)
 
 ### :rocket: Amélioration

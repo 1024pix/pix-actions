@@ -22,9 +22,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Copy release config in repo
       run: cp ${{ github.action_path }}/release.config.cjs ${{ github.workspace }}/release.config.cjs
       shell: bash
@@ -36,7 +33,6 @@ runs:
         semantic_version: 22
         extra_plugins: |
           @semantic-release/changelog@6
-          @semantic-release/npm@10
           @semantic-release/git@10
         extends: |
           @1024pix/conventional-changelog-pix@0.3.0

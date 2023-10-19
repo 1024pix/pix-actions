@@ -45,8 +45,8 @@ jobs:
 
 ## check-node-version-availability
 
-Chez Pix, nous utilisons le PaaS Scalingo, celui nous permet de déployer facilement nos applications.
-Nous utilisons également Renovate pour mettre à jour nos dépendances dont NodeJS.
+Chez Pix, nous utilisons le PaaS Scalingo, qui nous permet de déployer facilement nos applications.
+Nous utilisons également Renovate pour mettre à jour nos dépendances, dont NodeJS.
 Cependant, Scalingo ne propose pas toujours la dernière version de NodeJS,
 ce qui peut poser des problèmes lors du build sur Scalingo.
 

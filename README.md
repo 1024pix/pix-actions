@@ -58,6 +58,7 @@ de NodeJS est disponible chez Scalingo.
 <details>
   <summary><code>.github/workflows/check-node-version-availability.yml</code></summary>
 
+```
 name: Check node version availability on Scalingo
 
 on: [push]

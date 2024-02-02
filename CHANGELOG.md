@@ -1,3 +1,9 @@
+## [0.8.3](https://github.com/1024pix/pix-actions/compare/v0.8.2...v0.8.3) (2024-02-02)
+
+### :coffee: Autre
+
+- [#40](https://github.com/1024pix/pix-actions/pull/40) Ajouter une section sur l'action `release`.
+
 ## [0.8.2](https://github.com/1024pix/pix-actions/compare/v0.8.1...v0.8.2) (2024-02-02)
 
 ### :bug: Correction

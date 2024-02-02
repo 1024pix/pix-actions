@@ -30,12 +30,12 @@ runs:
       id: semantic
       uses: cycjimmy/semantic-release-action@v4
       with:
-        semantic_version: 22.0.5
+        semantic_version: 23
         extra_plugins: |
           @semantic-release/changelog@6
           @semantic-release/git@10
         extends: |
-          @1024pix/conventional-changelog-pix@1
+          @1024pix/conventional-changelog-pix@2
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ env.NPM_TOKEN }}

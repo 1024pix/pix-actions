@@ -1,3 +1,14 @@
+## [0.8.2](https://github.com/1024pix/pix-actions/compare/v0.8.1...v0.8.2) (2024-02-02)
+
+### :bug: Correction
+
+- [#39](https://github.com/1024pix/pix-actions/pull/39) Réparer l'action release 
+- [#36](https://github.com/1024pix/pix-actions/pull/36) Réparer le workflow release 
+
+### :coffee: Autre
+
+- [#38](https://github.com/1024pix/pix-actions/pull/38) Améliorer la lisibilité de l'action `check-node-version-availability`
+
 ## [0.8.1](https://github.com/1024pix/pix-actions/compare/v0.8.0...v0.8.1) (2023-10-19)
 
 ### :coffee: Autre

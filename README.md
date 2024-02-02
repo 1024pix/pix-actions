@@ -17,7 +17,7 @@ Ne pas oublier de définir le secret `PIX_SERVICE_ACTIONS_TOKEN`.
 <details>
   <summary><code>.github/workflows/auto-merge.yml</code></summary>
 
-```
+```yaml
 name: automerge check
 
 on:
@@ -58,7 +58,7 @@ de NodeJS est disponible chez Scalingo.
 <details>
   <summary><code>.github/workflows/check-node-version-availability.yml</code></summary>
 
-```
+```yaml
 name: Check node version availability on Scalingo
 
 on: [push]
@@ -71,5 +71,92 @@ jobs:
         uses: actions/checkout@v4
 
       - uses: 1024pix/pix-actions/check-node-version-availability-on-scalingo@v0
+```
+</details>
+
+## Release
+
+Pour simplifier le déploiement continue de nos applications, nous utilisons l'action `release` qui permet de créer 
+la bonne version, de générer le changelog et de la publier sur GitHub et npm si besoin.
+
+### Utilisation
+
+<details>
+  <summary><code>.github/workflows/release.yml</code></summary>
+
+```yaml
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types: [ 'deploy' ]
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: 1024pix/pix-actions/release@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+</details>
+
+### Configuration 
+
+#### `npmPublish` (optionnel)
+
+Permet de publier la nouvelle version sur npm.
+
+Valeur par défaut : `false`
+Nécessite d'ajouter un token NPM dans les secrets GitHub.
+Si une tâche de build est nécessaire, elle doit être faite en amont de l'appel de l'action.
+
+```yaml
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - run: npm ci
+      - run: npm run build
+        
+      - uses: 1024pix/pix-actions/release@main
+        with:
+          npmPublish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+
+#### `updateMajorVersion` (optionnel)
+
+Permet de mettre à jour le tag git majeur exemple :  `v1`. Utiliser pour nos pix-actions
+
+Valeur par défault : `false`
+
+```yaml
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: 1024pix/pix-actions/release@main
+        with: 
+          updateMajorVersion: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 

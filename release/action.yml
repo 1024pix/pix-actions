@@ -30,7 +30,7 @@ runs:
       id: semantic
       uses: cycjimmy/semantic-release-action@v4
       with:
-        semantic_version: 22.0.5
+        semantic_version: 23
         extra_plugins: |
           @semantic-release/changelog@6
           @semantic-release/git@10

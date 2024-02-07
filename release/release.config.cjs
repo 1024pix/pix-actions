@@ -14,7 +14,7 @@ module.exports = {
           { tag: "DOC", release: "patch" },
           { tag: "TECH", release: "patch" },
           { tag: "FEATURE", release: "minor" },
-          { tag: "BREAKING_CHANGE", release: "major" },
+          { tag: "BREAKING", release: "major" },
         ],
       }
     ],

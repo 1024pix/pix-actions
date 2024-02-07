@@ -1,3 +1,9 @@
+## [0.8.5](https://github.com/1024pix/pix-actions/compare/v0.8.4...v0.8.5) (2024-02-07)
+
+### :bug: Correction
+
+- [#42](https://github.com/1024pix/pix-actions/pull/42) Utiliser les règles de release de Pix
+
 ## [0.8.4](https://github.com/1024pix/pix-actions/compare/v0.8.3...v0.8.4) (2024-02-07)
 
 ### :bug: Correction

@@ -1,3 +1,9 @@
+## [0.8.6](https://github.com/1024pix/pix-actions/compare/v0.8.5...v0.8.6) (2024-03-06)
+
+### :bug: Correction
+
+- [#43](https://github.com/1024pix/pix-actions/pull/43) Utiliser uniquement les commits de merges pour les releases.
+
 ## [0.8.5](https://github.com/1024pix/pix-actions/compare/v0.8.4...v0.8.5) (2024-02-07)
 
 ### :bug: Correction

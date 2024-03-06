@@ -9,12 +9,12 @@ module.exports = {
       {
         "config": "@1024pix/conventional-changelog-pix",
         "releaseRules": [
-          { tag: "BUGFIX", release: "patch" },
-          { tag: "BUMP", release: "patch" },
-          { tag: "DOC", release: "patch" },
-          { tag: "TECH", release: "patch" },
-          { tag: "FEATURE", release: "minor" },
-          { tag: "BREAKING", release: "major" },
+          { tag: "BUGFIX", pr: '*', release: "patch" },
+          { tag: "BUMP", pr: '*', release: "patch" },
+          { tag: "DOC", pr: '*', release: "patch" },
+          { tag: "TECH", pr: '*', release: "patch" },
+          { tag: "FEATURE", pr: '*', release: "minor" },
+          { tag: "BREAKING", pr: '*', release: "major" },
         ],
       }
     ],

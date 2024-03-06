@@ -1,3 +1,10 @@
+## [0.8.7](https://github.com/1024pix/pix-actions/compare/v0.8.6...v0.8.7) (2024-03-06)
+
+### :arrow_up: Montée de version
+
+-  Update pascalgn/automerge-action action to v0.16.0 (auto-merge)
+- [#37](https://github.com/1024pix/pix-actions/pull/37) Update pascalgn/automerge-action action to v0.16.0 (auto-merge)
+
 ## [0.8.6](https://github.com/1024pix/pix-actions/compare/v0.8.5...v0.8.6) (2024-03-06)
 
 ### :bug: Correction

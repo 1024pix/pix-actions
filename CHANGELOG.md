@@ -1,3 +1,9 @@
+# [0.9.0](https://github.com/1024pix/pix-actions/compare/v0.8.9...v0.9.0) (2024-03-07)
+
+### :rocket: Amélioration
+
+- [#46](https://github.com/1024pix/pix-actions/pull/46) Propager les variables faites pas l'action semantic
+
 ## [0.8.9](https://github.com/1024pix/pix-actions/compare/v0.8.8...v0.8.9) (2024-03-07)
 
 ### :coffee: Autre

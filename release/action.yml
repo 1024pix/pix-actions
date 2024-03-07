@@ -41,6 +41,16 @@ runs:
         NPM_TOKEN: ${{ env.NPM_TOKEN }}
         NPM_PUBLISH: ${{ inputs.npmPublish }}
 
+    - name: share variables
+      if: steps.semantic.outputs.new_release_published == 'true'
+      run: | 
+        echo "new_release_published=${{ steps.semantic.outputs.new_release_published }}" >> $GITHUB_ENV
+        echo "new_release_version=${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_ENV
+        echo "new_release_major_version=${{ steps.semantic.outputs.new_release_major_version }}" >> $GITHUB_ENV
+        echo "new_release_minor_version=${{ steps.semantic.outputs.new_release_minor_version }}" >> $GITHUB_ENV
+        echo "new_release_patch_version=${{ steps.semantic.outputs.new_release_patch_version }}" >> $GITHUB_ENV
+      shell: bash
+
     - name: Push updates to branch for major version
       if: steps.semantic.outputs.new_release_published == 'true' && inputs.updateMajorVersion == 'true'
       run: "git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}"

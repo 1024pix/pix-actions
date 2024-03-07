@@ -103,9 +103,9 @@ jobs:
       
       - uses: 1024pix/pix-actions/release@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
 ```
-</details>
+
 
 ### Configuration 
 
@@ -135,7 +135,7 @@ jobs:
         with:
           npmPublish: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
@@ -157,6 +157,6 @@ jobs:
         with: 
           updateMajorVersion: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
 ```
-
+</details>

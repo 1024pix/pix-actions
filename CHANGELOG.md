@@ -1,3 +1,9 @@
+# [0.10.0](https://github.com/1024pix/pix-actions/compare/v0.9.0...v0.10.0) (2024-03-08)
+
+### :rocket: Amélioration
+
+- [#47](https://github.com/1024pix/pix-actions/pull/47) Déclencher une release pour une PR de revert
+
 # [0.9.0](https://github.com/1024pix/pix-actions/compare/v0.8.9...v0.9.0) (2024-03-07)
 
 ### :rocket: Amélioration

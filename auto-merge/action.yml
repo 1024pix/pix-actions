@@ -12,16 +12,16 @@ inputs:
   merge_labels:
     type: string
     default: ':rocket: Ready to Merge,!:warning: Blocked,!:earth_africa: i18n needed,!:busts_in_silhouette: Panel Review Needed,!Development in progress,!:eyes: Design Review Needed,!:eyes: Func Review Needed,!:eyes: Tech Review Needed'
-  merge_commit_message: 
+  merge_commit_message:
     type: string
     default: "{pullRequest.title} \n\n #{pullRequest.number}"
-  update_labels: 
+  update_labels:
     type: string
     default: ':rocket: Ready to Merge'
-  update_method: 
+  update_method:
     type: string
     default: rebase
-  merge_forks: 
+  merge_forks:
     type: string
     default: 'false'
 

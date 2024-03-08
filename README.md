@@ -165,4 +165,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
 ```
+
 </details>
+
+## Check PR title
+
+En complément de l'action de `release`, vérifier le format des titres de PRs.
+
+Les noms acceptés qui sont utilisables par `semantic-release` sont listés ici : https://github.com/1024pix/conventional-changelog-pix/blob/main/src/writerOpts.js.
+
+### Utilisation
+
+<details>
+  <summary><code>.github/workflows/check-pr-title.yml</code></summary>
+
+```yaml
+name: Check PR title
+
+on:
+  pull_request:
+    types: [opened, edited, ready_for_review, reopened]
+
+jobs:
+  lint-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 1024pix/pix-actions/check-pr-title@main
+```

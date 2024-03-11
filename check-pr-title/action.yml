@@ -1,0 +1,15 @@
+name: Check PR title
+description: >-
+  This workflow will check PR title, accepted tags are listed in
+  https://github.com/1024pix/conventional-changelog-pix/blob/main/src/writerOpts.js
+
+os: ubuntu-latest
+
+runs:
+  using: composite
+  steps:
+    - name: lint-pr-title
+      if: github.event.pull_request.draft == false && github.event.pull_request.state == 'open'
+      uses: Slashgear/action-check-pr-title@v4.3.0
+      with:
+        regexp: '^(\[[A-Z]+\]|Revert) '

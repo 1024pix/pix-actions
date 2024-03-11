@@ -1,7 +1,7 @@
 name: Generate Changelog and Release
 description: >-
-    This workflow will generate a changelog and release a new version of the
-    project.
+  This workflow will generate a changelog and release a new version of the
+  project.
 
 os: ubuntu-latest
 
@@ -43,7 +43,7 @@ runs:
 
     - name: share variables
       if: steps.semantic.outputs.new_release_published == 'true'
-      run: | 
+      run: |
         echo "new_release_published=${{ steps.semantic.outputs.new_release_published }}" >> $GITHUB_ENV
         echo "new_release_version=${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_ENV
         echo "new_release_major_version=${{ steps.semantic.outputs.new_release_major_version }}" >> $GITHUB_ENV

@@ -1,7 +1,9 @@
 # pix-actions
+
 Centralisations des GitHub Actions de Pix
 
 ## auto-merge
+
 Chez Pix, nous aimons les labels GitHub. Après notre process de review et quand une PR est prête à être mergée, nous ajoutons le label :
 
 > `:rocket: Ready to merge` :rocket:
@@ -9,6 +11,7 @@ Chez Pix, nous aimons les labels GitHub. Après notre process de review et quand
 L'ajout de ce label permet de démarrer l'action GitHub d'`auto-merge` qui va se débrouiller pour rebase la branche de la PR et la merger si toutes les validations automatisées (tests auto...) sont au vert.
 
 ### Utilisation
+
 :warning: WIP, la version `v1` n'est pas encore disponible.
 La liste des triggers permettant de déclencher l'action est à rediscuter.
 
@@ -38,9 +41,9 @@ jobs:
     steps:
       - uses: 1024pix/pix-actions/auto-merge@v0
         with:
-          auto_merge_token: "${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}"
-
+          auto_merge_token: '${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}'
 ```
+
 </details>
 
 ## check-node-version-availability
@@ -72,11 +75,12 @@ jobs:
 
       - uses: 1024pix/pix-actions/check-node-version-availability-on-scalingo@v0
 ```
+
 </details>
 
 ## Release
 
-Pour simplifier le déploiement continue de nos applications, nous utilisons l'action `release` qui permet de créer 
+Pour simplifier le déploiement continue de nos applications, nous utilisons l'action `release` qui permet de créer
 la bonne version, de générer le changelog et de la publier sur GitHub et npm si besoin.
 
 ### Utilisation
@@ -92,7 +96,7 @@ on:
     branches:
       - main
   repository_dispatch:
-    types: [ 'deploy' ]
+    types: ['deploy']
   workflow_dispatch:
 
 jobs:
@@ -102,14 +106,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      
+
       - uses: 1024pix/pix-actions/release@main
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
 ```
 
-
-### Configuration 
+### Configuration
 
 #### `npmPublish` (optionnel)
 
@@ -134,7 +137,7 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-        
+
       - uses: 1024pix/pix-actions/release@main
         with:
           npmPublish: true
@@ -143,10 +146,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-
 #### `updateMajorVersion` (optionnel)
 
-Permet de mettre à jour le tag git majeur exemple :  `v1`. Utiliser pour nos pix-actions
+Permet de mettre à jour le tag git majeur exemple : `v1`. Utiliser pour nos pix-actions
 
 Valeur par défault : `false`
 
@@ -158,11 +160,37 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      
+
       - uses: 1024pix/pix-actions/release@main
-        with: 
+        with:
           updateMajorVersion: true
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
 ```
+
 </details>
+
+## Check PR title
+
+En complément de l'action de `release`, vérifier le format des titres de PRs.
+
+Les noms acceptés qui sont utilisables par `semantic-release` sont listés ici : https://github.com/1024pix/conventional-changelog-pix/blob/main/src/writerOpts.js.
+
+### Utilisation
+
+<details>
+  <summary><code>.github/workflows/check-pr-title.yml</code></summary>
+
+```yaml
+name: Check PR title
+
+on:
+  pull_request:
+    types: [opened, edited, ready_for_review, reopened]
+
+jobs:
+  lint-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 1024pix/pix-actions/check-pr-title@main
+```

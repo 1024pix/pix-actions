@@ -12,4 +12,4 @@ runs:
       if: github.event.pull_request.draft == false && github.event.pull_request.state == 'open'
       uses: Slashgear/action-check-pr-title@v4.3.0
       with:
-        regexp: '^(\[[A-Z]+\]|Revert) '
+        regexp: '^(\[(BUGFIX|FEATURE|TECH|BUMP|DOC|POC)\]|Revert) '

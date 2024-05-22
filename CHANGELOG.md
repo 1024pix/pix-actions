@@ -1,3 +1,9 @@
+# [0.12.0](https://github.com/1024pix/pix-actions/compare/v0.11.1...v0.12.0) (2024-05-22)
+
+### :rocket: Amélioration
+
+- [#50](https://github.com/1024pix/pix-actions/pull/50) Améliorer la vérification des titres des PRs.
+
 ## [0.11.1](https://github.com/1024pix/pix-actions/compare/v0.11.0...v0.11.1) (2024-04-19)
 
 ### :arrow_up: Montée de version

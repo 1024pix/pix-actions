@@ -1,3 +1,9 @@
+# [0.13.0](https://github.com/1024pix/pix-actions/compare/v0.12.0...v0.13.0) (2024-05-24)
+
+### :rocket: Amélioration
+
+- [#51](https://github.com/1024pix/pix-actions/pull/51) Ajouter la possibilité d'utiliser le tag "BREAKING"
+
 # [0.12.0](https://github.com/1024pix/pix-actions/compare/v0.11.1...v0.12.0) (2024-05-22)
 
 ### :rocket: Amélioration

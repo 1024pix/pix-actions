@@ -23,7 +23,7 @@ inputs:
     default: rebase
   merge_forks:
     type: string
-    default: 'false'
+    default: 'true'
 
 runs:
   using: composite

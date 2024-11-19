@@ -1,3 +1,9 @@
+# [0.14.0](https://github.com/1024pix/pix-actions/compare/v0.13.1...v0.14.0) (2024-11-19)
+
+### :rocket: Amélioration
+
+- [#55](https://github.com/1024pix/pix-actions/pull/55) Ajouter une nouvelle action d'auto-merge
+
 ## [0.13.1](https://github.com/1024pix/pix-actions/compare/v0.13.0...v0.13.1) (2024-09-30)
 
 ### :arrow_up: Montée de version

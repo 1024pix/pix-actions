@@ -26,17 +26,14 @@ jobs:
   automerge:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: | 
-          echo ${{ inputs.pullRequest }}
-#      - name: automerge
-#        uses: pascalgn/automerge-action@v0.16.4
-#        env:
-#          GITHUB_TOKEN: '${{ inputs.auto_merge_token }}'
-#          MERGE_LABELS: '${{ inputs.merge_labels }}'
-#          MERGE_COMMIT_MESSAGE: '${{ inputs.merge_commit_message }}'
-#          UPDATE_LABELS: '${{ inputs.update_labels }}'
-#          UPDATE_METHOD: '${{ inputs.update_method }}'
-#          MERGE_FORKS: '${{ inputs.merge_forks }}'
-#          PULL_REQUEST: '${{ inputs.pullRequest }}'
+      - name: automerge
+        uses: pascalgn/automerge-action@v0.16.4
+        env:
+          GITHUB_TOKEN: '${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}'
+          MERGE_LABELS: '${{ inputs.merge_labels }}'
+          MERGE_COMMIT_MESSAGE: '${{ inputs.merge_commit_message }}'
+          UPDATE_LABELS: '${{ inputs.update_labels }}'
+          UPDATE_METHOD: '${{ inputs.update_method }}'
+          MERGE_FORKS: '${{ inputs.merge_forks }}'
+          PULL_REQUEST: '${{ inputs.pullRequest }}'
 

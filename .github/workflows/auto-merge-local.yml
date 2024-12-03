@@ -1,4 +1,4 @@
-name: automerge check
+name: automerge check (deprecated)
 
 on:
   pull_request:

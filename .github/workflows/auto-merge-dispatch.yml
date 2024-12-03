@@ -1,10 +1,10 @@
-name: automerge check
+name: automerge
 
 on:
   workflow_dispatch:
     inputs:
       pullRequest:
-        description: 'Pull request préfixé par le nom du repo : 1024pix/pix'
+        description: 'Pull request préfixé par le nom du repo : ex : 1024pix/pix/42'
         required: true
       merge_labels:
         type: string
@@ -23,7 +23,7 @@ on:
         default: 'false'
 
 jobs:
-  automerge:
+  automerge-dispatch:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
@@ -36,4 +36,9 @@ jobs:
           UPDATE_METHOD: '${{ inputs.update_method }}'
           MERGE_FORKS: '${{ inputs.merge_forks }}'
           PULL_REQUEST: '${{ inputs.pullRequest }}'
+
+      - name: Call Pix Bot
+        if: ${{ steps.automerge.outputs.mergeResult != 'merged' }}
+        run: |
+          curl ${{ secrets.PIX_BOT_URL }}/merge?status=failure -d '{"pullRequest": ${{ inputs.pullRequest }}  }' -H 'Authorization: Bearer ${{ secrets.PIX_BOT_TOKEN }}'
 

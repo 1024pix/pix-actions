@@ -1,3 +1,9 @@
+# [0.15.0](https://github.com/1024pix/pix-actions/compare/v0.14.0...v0.15.0) (2024-12-03)
+
+### :rocket: Amélioration
+
+- [#56](https://github.com/1024pix/pix-actions/pull/56) Appeler Pix Bot en cas de non merge de la PR par l'auto-merge
+
 # [0.14.0](https://github.com/1024pix/pix-actions/compare/v0.13.1...v0.14.0) (2024-11-19)
 
 ### :rocket: Amélioration

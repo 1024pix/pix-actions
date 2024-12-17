@@ -1,3 +1,9 @@
+# [0.16.0](https://github.com/1024pix/pix-actions/compare/v0.15.0...v0.16.0) (2024-12-17)
+
+### :rocket: Amélioration
+
+- [#57](https://github.com/1024pix/pix-actions/pull/57) modifie les valeurs de sleep et retry count pour l'action automerge
+
 # [0.15.0](https://github.com/1024pix/pix-actions/compare/v0.14.0...v0.15.0) (2024-12-03)
 
 ### :rocket: Amélioration

@@ -1,3 +1,9 @@
+## [0.17.1](https://github.com/1024pix/pix-actions/compare/v0.17.0...v0.17.1) (2024-12-19)
+
+### :bug: Correction
+
+- [#59](https://github.com/1024pix/pix-actions/pull/59) Utiliser correctement l'output de l'action automerge
+
 # [0.17.0](https://github.com/1024pix/pix-actions/compare/v0.16.0...v0.17.0) (2024-12-19)
 
 ### :rocket: Amélioration

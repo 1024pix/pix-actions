@@ -1,3 +1,9 @@
+# [0.17.0](https://github.com/1024pix/pix-actions/compare/v0.16.0...v0.17.0) (2024-12-19)
+
+### :rocket: Amélioration
+
+- [#58](https://github.com/1024pix/pix-actions/pull/58)  augmente le nombre d'essai et diminue l'intervale entre chaque essais
+
 # [0.16.0](https://github.com/1024pix/pix-actions/compare/v0.15.0...v0.16.0) (2024-12-17)
 
 ### :rocket: Amélioration

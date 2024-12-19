@@ -27,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
+        id: automerge
         uses: pascalgn/automerge-action@v0.16.4
         env:
           GITHUB_TOKEN: '${{ secrets.PIX_SERVICE_ACTIONS_TOKEN }}'
@@ -42,5 +43,5 @@ jobs:
       - name: Call Pix Bot
         if: ${{ steps.automerge.outputs.mergeResult != 'merged' }}
         run: |
-          curl ${{ secrets.PIX_BOT_URL }}/merge?status=failure -d '{"pullRequest": ${{ inputs.pullRequest }}  }' -H 'Authorization: Bearer ${{ secrets.PIX_BOT_TOKEN }}'
+          curl ${{ secrets.PIX_BOT_URL }}/merge?status=failure -d '{"pullRequest": "${{ inputs.pullRequest }}"  }' -H 'Authorization: Bearer ${{ secrets.PIX_BOT_TOKEN }}' -H 'Content-type: application/json'
 

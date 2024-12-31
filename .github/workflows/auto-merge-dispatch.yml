@@ -41,7 +41,7 @@ jobs:
           MERGE_RETRY_SLEEP: "30000"
 
       - name: Call Pix Bot
-        if: ${{ steps.automerge.outputs.mergeResult != 'merged' }}
+        if: ${{ steps.automerge.outputs.mergeResult != 'merged' ||  steps.automerge.outcome != 'success' }}
         run: |
           curl ${{ secrets.PIX_BOT_URL }}/merge?status=failure -d '{"pullRequest": "${{ inputs.pullRequest }}"  }' -H 'Authorization: Bearer ${{ secrets.PIX_BOT_TOKEN }}' -H 'Content-type: application/json'
 

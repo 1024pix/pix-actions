@@ -1,4 +1,5 @@
 name: automerge
+run-name: automerge ${{ inputs.pullRequest }}
 
 on:
   workflow_dispatch:

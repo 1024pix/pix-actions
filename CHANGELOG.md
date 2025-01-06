@@ -1,3 +1,9 @@
+# [0.18.0](https://github.com/1024pix/pix-actions/compare/v0.17.2...v0.18.0) (2025-01-06)
+
+### :rocket: Amélioration
+
+- [#61](https://github.com/1024pix/pix-actions/pull/61) Ajouter du contexte dans le nom de l'action
+
 ## [0.17.2](https://github.com/1024pix/pix-actions/compare/v0.17.1...v0.17.2) (2024-12-31)
 
 ### :bug: Correction

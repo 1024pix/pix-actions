@@ -1,3 +1,9 @@
+# [0.19.0](https://github.com/1024pix/pix-actions/compare/v0.18.0...v0.19.0) (2025-01-08)
+
+### :rocket: Amélioration
+
+- [#62](https://github.com/1024pix/pix-actions/pull/62) Lancer l'appel à Pix Bot à chaque fois que l'action auto-merge est en échec
+
 # [0.18.0](https://github.com/1024pix/pix-actions/compare/v0.17.2...v0.18.0) (2025-01-06)
 
 ### :rocket: Amélioration

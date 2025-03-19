@@ -34,12 +34,20 @@ module.exports = {
       }
     ],
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "find . -mindepth 2 -maxdepth 3 -name 'package.json' -not -path '*/node_modules/*' -execdir sh -c 'npm version \"$0\" --git-tag-version=false' \"${nextRelease.type}\" \\;",
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "assets": [
           "CHANGELOG.md",
           "package.json",
           "package-lock.json",
+          "**/package.json",
+          "**/package-lock.json",
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }

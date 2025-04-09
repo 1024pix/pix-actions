@@ -1,3 +1,11 @@
+const semanticReleaseChangelog =
+  process.env.CHANGELOG_TITLE === 'undefined' ?
+    "@semantic-release/changelog" :
+  [
+    "@semantic-release/changelog",
+    { "changelogTitle": process.env.CHANGELOG_TITLE },
+  ];
+
 module.exports = {
   "branches": [
     "main",
@@ -25,7 +33,7 @@ module.exports = {
         "config": "@1024pix/conventional-changelog-pix"
       }
     ],
-    "@semantic-release/changelog",
+    semanticReleaseChangelog,
     "@semantic-release/github",
     [
       "@semantic-release/npm",

@@ -1,3 +1,11 @@
+const semanticReleaseChangelog =
+  process.env.CHANGELOG_TITLE === 'undefined' ?
+    "@semantic-release/changelog" :
+  [
+    "@semantic-release/changelog",
+    { "changelogTitle": process.env.CHANGELOG_TITLE },
+  ];
+
 module.exports = {
   "branches": [
     "main",
@@ -25,12 +33,18 @@ module.exports = {
         "config": "@1024pix/conventional-changelog-pix"
       }
     ],
-    "@semantic-release/changelog",
+    semanticReleaseChangelog,
     "@semantic-release/github",
     [
       "@semantic-release/npm",
       {
         "npmPublish": process.env.NPM_PUBLISH === "true",
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "find . -mindepth 2 -maxdepth 3 -name 'package.json' -not -path '*/node_modules/*' -execdir sh -c 'npm version \"$0\" --git-tag-version=false' \"${nextRelease.type}\" \\;",
       }
     ],
     [
@@ -40,6 +54,8 @@ module.exports = {
           "CHANGELOG.md",
           "package.json",
           "package-lock.json",
+          "**/package.json",
+          "**/package-lock.json",
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }

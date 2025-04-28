@@ -18,6 +18,11 @@ inputs:
       Whether to update the major version or not. If set to true, the major
       version will be updated.
     default: false
+  changelogTitle:
+    required: false
+    description: >-
+      Title of the CHANGELOG.md file if there is one
+    default: undefined
 
 runs:
   using: composite
@@ -34,12 +39,14 @@ runs:
         extra_plugins: |
           @semantic-release/changelog@6
           @semantic-release/git@10
+          @semantic-release/exec@6
         extends: |
           @1024pix/conventional-changelog-pix@2
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ env.NPM_TOKEN }}
         NPM_PUBLISH: ${{ inputs.npmPublish }}
+        CHANGELOG_TITLE: ${{ inputs.changelogTitle }}
 
     - name: share variables
       if: steps.semantic.outputs.new_release_published == 'true'

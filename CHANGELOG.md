@@ -1,3 +1,9 @@
+# [0.20.0](https://github.com/1024pix/pix-actions/compare/v0.19.0...v0.20.0) (2025-04-28)
+
+### :rocket: Amélioration
+
+- [#63](https://github.com/1024pix/pix-actions/pull/63) Mettre à jour tous les packages.json des sous dossiers des repositories (PIX-17050).
+
 # [0.19.0](https://github.com/1024pix/pix-actions/compare/v0.18.0...v0.19.0) (2025-01-08)
 
 ### :rocket: Amélioration

@@ -54,8 +54,7 @@ module.exports = {
           "CHANGELOG.md",
           "package.json",
           "package-lock.json",
-          "**/package.json",
-          "**/package-lock.json",
+          ["**/package.json", "**/package-lock.json", "!**/node_modules/**/*.json"],
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }

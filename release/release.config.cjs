@@ -54,6 +54,7 @@ module.exports = {
           "CHANGELOG.md",
           "package.json",
           "package-lock.json",
+          "!**/node_modules/*",
           "**/package.json",
           "**/package-lock.json",
         ],

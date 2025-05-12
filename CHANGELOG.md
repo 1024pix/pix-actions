@@ -1,3 +1,9 @@
+## [0.20.1](https://github.com/1024pix/pix-actions/compare/v0.20.0...v0.20.1) (2025-05-12)
+
+### :bug: Correction
+
+- [#64](https://github.com/1024pix/pix-actions/pull/64) Ne pas inclure les package.json et package-lock.json des dossiers node_modules
+
 # [0.20.0](https://github.com/1024pix/pix-actions/compare/v0.19.0...v0.20.0) (2025-04-28)
 
 ### :rocket: Amélioration

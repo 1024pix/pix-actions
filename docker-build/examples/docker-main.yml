@@ -1,0 +1,39 @@
+name: Docker build Main branch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/**'
+      - 'front/**'
+      - '.github/workflows/**'
+
+jobs:
+  build:
+    uses: 1024pix/pix-actions/.github/workflows/docker-build.yml@main
+    with:
+      images: |
+        [
+          {
+            "name": "app-api",
+            "context": "./api",
+            "dockerfile": "./api/Dockerfile",
+            "build-args": [
+              "NODE_ENV=production",
+              "API_BASE_URL=https://api.example.com"
+            ]
+          },
+          {
+            "name": "app-front",
+            "context": "./front",
+            "dockerfile": "./front/Dockerfile",
+            "build-args": [
+              "NEXT_PUBLIC_API_URL=https://api.example.com",
+              "BUILD_ENV=production"
+            ]
+          }
+        ]
+    secrets:
+      # Secrets d'organisation Pix
+      CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT: ${{ secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}
+      SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}

@@ -194,3 +194,86 @@ jobs:
     steps:
       - uses: 1024pix/pix-actions/check-pr-title@main
 ```
+
+</details>
+
+## Docker Build
+
+Workflow réutilisable pour construire et pousser des images Docker vers un registry d'images docker. 
+
+### Fonctionnalités
+
+- **Build multi-images** : Construit plusieurs images Docker en parallèle via une stratégie matrix
+- **Registry flexible** : Compatible avec tout registry Docker (Scalingo, AWS ECR, etc.)
+- **Cache intelligent** : Utilise GitHub Actions cache pour accélérer les builds
+
+### Utilisation
+
+**Fichiers d'exemples disponibles** : Consultez le dossier [`docker-build/examples/`](./docker-build/examples/) pour des exemples complets avec build-args.
+
+### Système de tags
+
+- **PR** : `pr-123-5` (PR #123, run #5)
+- **Release** : `v1.2.3` (nom du tag Git) > Automatique avec l'action `release`
+- **Main** : `rc-2025.01.25-42` (date + run number)
+- **Latest** : `latest` (branche principale uniquement)
+
+### Configuration
+
+#### Paramètres
+
+- `images` : Tableau JSON des images à construire (obligatoire)
+- `runs-on` : Runner à utiliser (optionnel, défaut: `ubuntu-latest`)
+
+#### Variables d'environnement par image
+
+Vous pouvez passer des variables d'environnement spécifiques à chaque image via le champ `build-args` :
+
+```yaml
+[ ... ]
+      "build-args": [
+        "NODE_ENV=production",
+        "API_BASE_URL=https://api.example.com"
+      ]
+[ ... ]
+```
+
+Ces variables sont passées comme `--build-arg` à Docker. Dans votre `Dockerfile`, déclarez-les avec `ARG` :
+
+```dockerfile
+ARG NODE_ENV
+ARG API_BASE_URL
+
+# Pour les utiliser au démarrage de l'application, déclarer les avec ENV
+ENV NODE_ENV=$NODE_ENV
+ENV API_BASE_URL=$API_BASE_URL
+```
+
+#### Secrets du registry
+
+```yaml
+jobs:
+  build:
+    uses: 1024pix/pix-actions/.github/workflows/docker-build.yml@main
+    with:
+      images: |
+        [...]
+    secrets:
+      CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT: ${{ secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}
+      SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}
+```
+
+**Secrets custom ( optionnel ) ** : 
+
+```yaml
+jobs:
+  build:
+    uses: 1024pix/pix-actions/.github/workflows/docker-build.yml@main
+    with:
+      images: |
+        [...]
+    secrets:
+      REGISTRY_ENDPOINT: ${{ secrets.CUSTOM_REGISTRY_ENDPOINT }}
+      REGISTRY_USERNAME: ${{ secrets.CUSTOM_REGISTRY_USERNAME }}
+      REGISTRY_TOKEN: ${{ secrets.CUSTOM_REGISTRY_TOKEN }}
+```

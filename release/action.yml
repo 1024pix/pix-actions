@@ -6,11 +6,16 @@ description: >-
 os: ubuntu-latest
 
 inputs:
+  hasNpmPackages:
+    required: false
+    description: >-
+      Whether to update version in package.json or not. If set to false, the package.json should not be updated
+    default: true
   npmPublish:
     required: false
     description: >-
       Whether to publish to npm or not. If set to false, the release will only
-      be created on GitHub.
+      be created on GitHub. hasNpmPackages should also be true.
     default: false
   updateMajorVersion:
     required: false
@@ -44,6 +49,7 @@ runs:
           @1024pix/conventional-changelog-pix@2
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        HAS_NPM_PACKAGES: ${{ inputs.hasNpmPackages }}
         NPM_TOKEN: ${{ env.NPM_TOKEN }}
         NPM_PUBLISH: ${{ inputs.npmPublish }}
         CHANGELOG_TITLE: ${{ inputs.changelogTitle }}

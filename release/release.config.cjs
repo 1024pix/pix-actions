@@ -6,6 +6,21 @@ const semanticReleaseChangelog =
     { "changelogTitle": process.env.CHANGELOG_TITLE },
   ];
 
+const npmPlugin = process.env.HAS_NPM_PACKAGES === 'true' ? [
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": process.env.NPM_PUBLISH === "true",
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "find . -mindepth 2 -maxdepth 3 -name 'package.json' -not -path '*/node_modules/*' -execdir sh -c 'npm version \"$0\" --git-tag-version=false' \"${nextRelease.type}\" \\;",
+      }
+    ]
+  ] : [];
+
 module.exports = {
   "branches": [
     "main",
@@ -35,18 +50,7 @@ module.exports = {
     ],
     semanticReleaseChangelog,
     "@semantic-release/github",
-    [
-      "@semantic-release/npm",
-      {
-        "npmPublish": process.env.NPM_PUBLISH === "true",
-      }
-    ],
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "find . -mindepth 2 -maxdepth 3 -name 'package.json' -not -path '*/node_modules/*' -execdir sh -c 'npm version \"$0\" --git-tag-version=false' \"${nextRelease.type}\" \\;",
-      }
-    ],
+    ...npmPlugin,
     [
       "@semantic-release/git",
       {

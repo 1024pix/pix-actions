@@ -1,3 +1,9 @@
+# [0.21.0](https://github.com/1024pix/pix-actions/compare/v0.20.1...v0.21.0) (2025-09-30)
+
+### :rocket: Amélioration
+
+- [#68](https://github.com/1024pix/pix-actions/pull/68) Créer des releases pour les repos data
+
 ## [0.20.1](https://github.com/1024pix/pix-actions/compare/v0.20.0...v0.20.1) (2025-05-12)
 
 ### :bug: Correction

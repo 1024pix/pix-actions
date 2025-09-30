@@ -1,3 +1,9 @@
+## [0.21.1](https://github.com/1024pix/pix-actions/compare/v0.21.0...v0.21.1) (2025-09-30)
+
+### :building_construction: Tech
+
+- [#67](https://github.com/1024pix/pix-actions/pull/67) Ajout d'une configuration pour les builds docker
+
 # [0.21.0](https://github.com/1024pix/pix-actions/compare/v0.20.1...v0.21.0) (2025-09-30)
 
 ### :rocket: Amélioration

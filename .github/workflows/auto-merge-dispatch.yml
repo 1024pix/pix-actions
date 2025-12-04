@@ -38,7 +38,7 @@ jobs:
           UPDATE_METHOD: '${{ inputs.update_method }}'
           MERGE_FORKS: '${{ inputs.merge_forks }}'
           PULL_REQUEST: '${{ inputs.pullRequest }}'
-          MERGE_RETRIES: "40"
+          MERGE_RETRIES: "30"
           MERGE_RETRY_SLEEP: "30000"
 
       - name: Call Pix Bot

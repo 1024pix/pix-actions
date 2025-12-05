@@ -1,3 +1,9 @@
+## [0.21.2](https://github.com/1024pix/pix-actions/compare/v0.21.1...v0.21.2) (2025-12-05)
+
+### :building_construction: Tech
+
+- [#71](https://github.com/1024pix/pix-actions/pull/71) Réduire le temps de merge des PR (PIX-20700)
+
 ## [0.21.1](https://github.com/1024pix/pix-actions/compare/v0.21.0...v0.21.1) (2025-09-30)
 
 ### :building_construction: Tech

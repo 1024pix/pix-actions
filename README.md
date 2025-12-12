@@ -64,16 +64,20 @@ de NodeJS est disponible chez Scalingo.
 ```yaml
 name: Check node version availability on Scalingo
 
-on: [push]
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   check-node-compatibility:
+    # Vérifie que la PR est une mise à jour de Node par Renovate
+    if: github.head_ref == 'renovate/node' || (startsWith(github.head_ref, 'renovate/major-') && endsWith(github.head_ref, '-node'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - uses: 1024pix/pix-actions/check-node-version-availability-on-scalingo@v0
+      - uses: 1024pix/pix-actions/check-node-version-availability-on-scalingo@main
 ```
 
 </details>
@@ -103,7 +107,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
 
@@ -127,11 +131,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 20
 
@@ -143,7 +147,6 @@ jobs:
           npmPublish: true
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Use PAT with repo scope, and user related should have admin access if main branch is protected
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
 #### `updateMajorVersion` (optionnel)
@@ -157,7 +160,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
 

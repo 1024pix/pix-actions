@@ -1,3 +1,9 @@
+## [0.21.6](https://github.com/1024pix/pix-actions/compare/v0.21.5...v0.21.6) (2025-12-16)
+
+### :arrow_up: Montée de version
+
+- [#69](https://github.com/1024pix/pix-actions/pull/69) Update docker/build-push-action action to v6 (workflows)
+
 ## [0.21.5](https://github.com/1024pix/pix-actions/compare/v0.21.4...v0.21.5) (2025-12-16)
 
 ### :arrow_up: Montée de version

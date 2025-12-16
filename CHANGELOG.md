@@ -1,3 +1,9 @@
+## [0.21.3](https://github.com/1024pix/pix-actions/compare/v0.21.2...v0.21.3) (2025-12-16)
+
+### :building_construction: Tech
+
+- [#72](https://github.com/1024pix/pix-actions/pull/72) Passage au système de Trusted publishers de npm
+
 ## [0.21.2](https://github.com/1024pix/pix-actions/compare/v0.21.1...v0.21.2) (2025-12-05)
 
 ### :building_construction: Tech

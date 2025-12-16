@@ -1,3 +1,9 @@
+## [0.21.4](https://github.com/1024pix/pix-actions/compare/v0.21.3...v0.21.4) (2025-12-16)
+
+### :arrow_up: Montée de version
+
+- [#70](https://github.com/1024pix/pix-actions/pull/70) Update actions/checkout action to v6 (workflows)
+
 ## [0.21.3](https://github.com/1024pix/pix-actions/compare/v0.21.2...v0.21.3) (2025-12-16)
 
 ### :building_construction: Tech

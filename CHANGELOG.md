@@ -1,3 +1,9 @@
+## [0.21.5](https://github.com/1024pix/pix-actions/compare/v0.21.4...v0.21.5) (2025-12-16)
+
+### :arrow_up: Montée de version
+
+- [#66](https://github.com/1024pix/pix-actions/pull/66) Update Slashgear/action-check-pr-title action to v5 (check-pr-title)
+
 ## [0.21.4](https://github.com/1024pix/pix-actions/compare/v0.21.3...v0.21.4) (2025-12-16)
 
 ### :arrow_up: Montée de version

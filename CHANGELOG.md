@@ -1,3 +1,9 @@
+## [0.21.7](https://github.com/1024pix/pix-actions/compare/v0.21.6...v0.21.7) (2025-12-31)
+
+### :building_construction: Tech
+
+- [#73](https://github.com/1024pix/pix-actions/pull/73) Mettre à jour la version de conventional-changelog-pix
+
 ## [0.21.6](https://github.com/1024pix/pix-actions/compare/v0.21.5...v0.21.6) (2025-12-16)
 
 ### :arrow_up: Montée de version

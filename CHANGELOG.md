@@ -1,3 +1,9 @@
+# [0.22.0](https://github.com/1024pix/pix-actions/compare/v0.21.7...v0.22.0) (2026-02-09)
+
+### :rocket: Amélioration
+
+- [#74](https://github.com/1024pix/pix-actions/pull/74) Permettre la création de releases depuis des hotfix.
+
 ## [0.21.7](https://github.com/1024pix/pix-actions/compare/v0.21.6...v0.21.7) (2025-12-31)
 
 ### :building_construction: Tech

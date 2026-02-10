@@ -24,8 +24,7 @@ const npmPlugin = process.env.HAS_NPM_PACKAGES === 'true' ? [
 module.exports = {
   "branches": [
     "main",
-    "dev",
-    "hotfix*"
+    "dev"
   ],
   "plugins": [
     [

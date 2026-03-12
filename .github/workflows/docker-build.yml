@@ -52,7 +52,7 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ secrets.REGISTRY_ENDPOINT || secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}/${{ matrix.image.name }}
           tags: |

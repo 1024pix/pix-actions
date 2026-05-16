@@ -280,3 +280,34 @@ jobs:
       REGISTRY_USERNAME: ${{ secrets.CUSTOM_REGISTRY_USERNAME }}
       REGISTRY_TOKEN: ${{ secrets.CUSTOM_REGISTRY_TOKEN }}
 ```
+
+## close-old-pull-requests
+Une actions qui permet de fermer les pull requests qui n'ont pas été mises à jour depuis un certain temps. Utile pour éviter d'avoir des PRs qui traînent sans être traitées.
+### Utilisation
+<details>
+  <summary><code>.github/workflows/close-old-pull-requests.yml</code></summary>
+
+```yaml
+name: Check Inactive Pull Requests
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM
+    - cron: '0 9 * * 1'
+  # Allow manual execution
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: write
+
+jobs:
+  check-inactive-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pix-actions/close-old-pull-requests@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+```
+</details>

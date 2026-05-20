@@ -47,14 +47,18 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME || 'nologin' }}
           password: ${{ secrets.REGISTRY_TOKEN || secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}
 
+      - name: Pad run number
+        id: pad
+        run: echo "run_number=$(printf '%03d' ${{ github.run_number }})" >> $GITHUB_OUTPUT
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.REGISTRY_ENDPOINT || secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}/${{ matrix.image.name }}
           tags: |
-            type=raw,value=pr-${{ github.event.pull_request.number }}-${{ github.run_number }},enable=${{ github.event_name == 'pull_request' }}
-            type=raw,value=rc-{{date 'YYYY.MM.DD'}}-${{ github.run_number }},enable={{is_default_branch}}
+            type=raw,value=pr-${{ github.event.pull_request.number }}-${{ steps.pad.outputs.run_number }},enable=${{ github.event_name == 'pull_request' }}
+            type=raw,value=rc-{{date 'YYYY.MM.DD'}}-${{ steps.pad.outputs.run_number }},enable={{is_default_branch}}
             type=ref,event=tag
             type=raw,value=latest,enable={{is_default_branch}}
 

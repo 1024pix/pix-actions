@@ -1,0 +1,14 @@
+name: Test Docker Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      images: '[{"name":"test-image","context":".","dockerfile":"Dockerfile"}]'
+    secrets:
+      REGISTRY_ENDPOINT: ${{ secrets.REGISTRY_ENDPOINT }}
+      REGISTRY_USERNAME: "nologin"
+      REGISTRY_TOKEN: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY  }}

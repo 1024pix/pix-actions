@@ -1,12 +1,10 @@
 name: Test Docker Build
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 jobs:
   test:
-    runs-on: "ubuntu-latest"
-
-    steps:
-      - name: Checkout repository
-        run: echo "coucou"
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      images: '[{"name":"test-image","context":".","dockerfile":"Dockerfile"}]'

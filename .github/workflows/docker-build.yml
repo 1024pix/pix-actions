@@ -1,4 +1,4 @@
-name: Docker generic Build 
+name: Docker generic Build
 
 on:
   workflow_call:
@@ -23,7 +23,6 @@ on:
         required: false
       SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY:
         required: false
-        
 
 jobs:
   build:
@@ -32,10 +31,14 @@ jobs:
       fail-fast: false
       matrix:
         image: ${{ fromJson(inputs.images) }}
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
+      - name: Pad run number
+        id: pad
+        run: echo "run_number=$(printf '%03d' ${{ github.run_number }})" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -53,8 +56,8 @@ jobs:
         with:
           images: ${{ secrets.REGISTRY_ENDPOINT || secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}/${{ matrix.image.name }}
           tags: |
-            type=raw,value=pr-${{ github.event.pull_request.number }}-${{ github.run_number }},enable=${{ github.event_name == 'pull_request' }}
-            type=raw,value=rc-{{date 'YYYY.MM.DD'}}-${{ github.run_number }},enable={{is_default_branch}}
+            type=raw,value=pr-${{ github.event.pull_request.number }}-${{ steps.pad.outputs.run_number }},enable=${{ github.event_name == 'pull_request' }}
+            type=raw,value=rc-{{date 'YYYY.MM.DD'}}-${{ steps.pad.outputs.run_number }},enable={{is_default_branch}}
             type=ref,event=tag
             type=raw,value=latest,enable={{is_default_branch}}
 

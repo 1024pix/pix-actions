@@ -1,3 +1,5 @@
+## [0.23.1](https://github.com/1024pix/pix-actions/compare/v0.23.0...v0.23.1) (2026-05-27)
+
 # [0.23.0](https://github.com/1024pix/pix-actions/compare/v0.22.0...v0.23.0) (2026-02-19)
 
 ### :rocket: Amélioration

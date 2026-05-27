@@ -1,0 +1,27 @@
+name: Docker Bake Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push-image:
+    uses: 1024pix/pix-actions/.github/workflows/docker-bake.yml@main
+    with:
+      files: |
+        docker-bake.hcl
+      targets: |
+        pix-site
+        pix-pro
+      vars: |
+        NODE_ENV=production
+        TAG=latest
+      set: |
+        pix-site.cache-from=type=gha,scope=pix-site
+        pix-pro.cache-from=type=gha,scope=pix-pro
+        pix-site.cache-to=type=gha,scope=pix-site,mode=max
+        pix-pro.cache-to=type=gha,scope=pix-pro,mode=max
+    secrets:
+      REGISTRY_ENDPOINT: ${{ secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}
+      REGISTRY_TOKEN: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}

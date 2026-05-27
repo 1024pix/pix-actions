@@ -280,3 +280,56 @@ jobs:
       REGISTRY_USERNAME: ${{ secrets.CUSTOM_REGISTRY_USERNAME }}
       REGISTRY_TOKEN: ${{ secrets.CUSTOM_REGISTRY_TOKEN }}
 ```
+
+## Docker Bake
+
+Workflow réutilisable pour construire et pousser des images Docker en utilisant Docker Bake.
+
+### Fonctionnalités
+
+- **Build multi-cibles** : Construit plusieurs cibles définies dans vos fichiers bake
+- **Registry flexible** : Compatible avec tout registry Docker (Scalingo, AWS ECR, etc.)
+- **Cache intelligent** : Permet de définir des caches par cible
+
+### Utilisation
+
+**Fichiers d'exemples disponibles** : Consultez le dossier [`docker-bake/examples/`](./docker-bake/examples/) pour des exemples complets.
+
+### Configuration
+
+#### Paramètres
+
+- `runs-on` : Runner à utiliser (optionnel, défaut: `ubuntu-latest`)
+- `files` : Liste des fichiers bake (optionnel)
+- `targets` : Liste des cibles à construire (optionnel)
+- `set` : Liste des overrides, utile pour configurer docker bake, comme avec le cache (optionnel)
+- `vars` : Liste des variables à passer à Docker Bake (optionnel)
+
+#### Utilisation des variables
+
+Vous pouvez passer des variables à Docker Bake via le paramètre `vars`. Cela permet de surcharger des variables définis dans vos fichiers HCL :
+
+```yaml
+jobs:
+  bake:
+    uses: 1024pix/pix-actions/.github/workflows/docker-bake.yml@main
+    with:
+      files: docker-bake.hcl
+      set: |
+        ENV_NAME=prod
+        TAG=latest
+```
+
+#### Secrets du registry
+
+```yaml
+jobs:
+  bake:
+    uses: 1024pix/pix-actions/.github/workflows/docker-bake.yml@main
+    with:
+      files: |
+        docker-bake.hcl
+    secrets:
+      REGISTRY_ENDPOINT: ${{ secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}
+      REGISTRY_TOKEN: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}
+```

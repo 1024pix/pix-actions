@@ -1,3 +1,12 @@
+## [0.23.2](https://github.com/1024pix/pix-actions/compare/v0.23.1...v0.23.2) (2026-05-28)
+
+### :arrow_up: Montée de version
+
+- [#79](https://github.com/1024pix/pix-actions/pull/79) Update docker/build-push-action action to v7 (workflows) 
+- [#77](https://github.com/1024pix/pix-actions/pull/77) Update docker/login-action action to v4 (workflows) 
+- [#80](https://github.com/1024pix/pix-actions/pull/80) Update docker/metadata-action action to v6 (workflows) 
+- [#78](https://github.com/1024pix/pix-actions/pull/78) Update docker/setup-buildx-action action to v4 (workflows)
+
 ## [0.23.1](https://github.com/1024pix/pix-actions/compare/v0.23.0...v0.23.1) (2026-05-27)
 
 # [0.23.0](https://github.com/1024pix/pix-actions/compare/v0.22.0...v0.23.0) (2026-02-19)

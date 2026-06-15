@@ -1,3 +1,9 @@
+## [0.23.3](https://github.com/1024pix/pix-actions/compare/v0.23.2...v0.23.3) (2026-06-15)
+
+### :arrow_up: Montée de version
+
+- [#87](https://github.com/1024pix/pix-actions/pull/87) Update docker/setup-buildx-action action to v4 (workflows)
+
 ## [0.23.2](https://github.com/1024pix/pix-actions/compare/v0.23.1...v0.23.2) (2026-05-28)
 
 ### :arrow_up: Montée de version

@@ -1,3 +1,9 @@
+## [0.23.4](https://github.com/1024pix/pix-actions/compare/v0.23.3...v0.23.4) (2026-06-15)
+
+### :arrow_up: Montée de version
+
+- [#86](https://github.com/1024pix/pix-actions/pull/86) Update docker/login-action action to v4 (workflows)
+
 ## [0.23.3](https://github.com/1024pix/pix-actions/compare/v0.23.2...v0.23.3) (2026-06-15)
 
 ### :arrow_up: Montée de version

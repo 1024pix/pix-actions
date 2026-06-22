@@ -23,6 +23,8 @@ on:
         required: false
       SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY:
         required: false
+      GH_TOKEN:
+        required: false
 
 jobs:
   build:

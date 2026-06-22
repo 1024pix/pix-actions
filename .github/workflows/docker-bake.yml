@@ -24,6 +24,10 @@ on:
         description: 'List of bake variables'
         required: false
         type: string
+      secrets:
+        description: 'List of bake secrets'
+        required: false
+        type: string
     secrets:
       REGISTRY_ENDPOINT:
         required: false
@@ -60,6 +64,8 @@ jobs:
           vars: |
             REGISTRY=${{ secrets.REGISTRY_ENDPOINT }}
             ${{ inputs.vars }}
+          secrets: |
+            ${{ inputs.secrets }}
 
       - name: Build summary
         run: |

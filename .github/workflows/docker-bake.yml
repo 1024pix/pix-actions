@@ -24,16 +24,14 @@ on:
         description: 'List of bake variables'
         required: false
         type: string
-      secrets:
-        description: 'List of bake secrets'
-        required: false
-        type: string
     secrets:
       REGISTRY_ENDPOINT:
         required: false
       REGISTRY_USERNAME:
         required: false
       REGISTRY_TOKEN:
+        required: false
+      secret_vars:
         required: false
 
 jobs:
@@ -64,9 +62,7 @@ jobs:
           vars: |
             REGISTRY=${{ secrets.REGISTRY_ENDPOINT }}
             ${{ inputs.vars }}
-          secrets: |
-            ${{ inputs.secrets }}
-
+            ${{ secrets.secret_vars }}
       - name: Build summary
         run: |
           echo "## 🐳 Docker Bake completed successfully" >> $GITHUB_STEP_SUMMARY

@@ -29,7 +29,7 @@ runs:
   using: composite
   steps:
     - name: automerge
-      uses: pascalgn/automerge-action@v0.16.4
+      uses: pascalgn/automerge-action@7961b8b5eec56cc088c140b56d864285eabd3f67 # v0.16.4
       if: >
         ${{ contains(github.event.pull_request.labels.*.name, inputs.update_labels) }}
       env:

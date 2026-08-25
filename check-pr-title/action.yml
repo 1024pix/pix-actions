@@ -10,6 +10,6 @@ runs:
   steps:
     - name: lint-pr-title
       if: github.event.pull_request.draft == false && github.event.pull_request.state == 'open'
-      uses: Slashgear/action-check-pr-title@v5.0.1
+      uses: Slashgear/action-check-pr-title@161cede0311ec624ae3ee76a2c27522f7b6fa2d8 # v5.0.1
       with:
         regexp: '^(\[(BUGFIX|FEATURE|TECH|BUMP|DOC|POC|BREAKING)\]|Revert) '

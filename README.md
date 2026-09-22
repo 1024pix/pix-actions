@@ -84,8 +84,11 @@ jobs:
 
 ## Release
 
-Pour simplifier le déploiement continue de nos applications, nous utilisons l'action `release` qui permet de créer
-la bonne version, de générer le changelog et de la publier sur GitHub et npm si besoin.
+Pour simplifier le déploiement continu de nos applications, nous utilisons l'action `release` qui permet de créer la bonne version, de générer le changelog et de la publier sur GitHub et npm si besoin.
+Cette action détermine la version de la release en fonction des messages de commits.\
+Les messages doivent comporter [les noms listés ici](https://github.com/1024pix/conventional-changelog-pix/blob/main/src/writer.js)\
+Pour cela, on utilise généralement le titre des PR (avec l'action [Check PR Title](#check-pr-title)) avec le merge commit.\
+(Si le message de commit est sur plusieurs lignes, avec le #1234 sur une autre ligne, alors le message n'est pas pris en compte par semantic-release)
 
 ### Utilisation
 

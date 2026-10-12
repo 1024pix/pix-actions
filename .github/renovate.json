@@ -1,8 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>1024pix/renovate-config:default-v2",
-    "github>1024pix/renovate-config:infra-v2"
-  ],
+  "extends": ["local>1024pix/renovate-config:default"],
   "enabled": true
 }

@@ -1,3 +1,5 @@
+## [0.23.9](https://github.com/1024pix/pix-actions/compare/v0.23.8...v0.23.9) (2026-10-12)
+
 ## [0.23.8](https://github.com/1024pix/pix-actions/compare/v0.23.7...v0.23.8) (2026-10-09)
 
 ## [0.23.7](https://github.com/1024pix/pix-actions/compare/v0.23.6...v0.23.7) (2026-10-09)

@@ -27,8 +27,12 @@ const npmPlugin = process.env.HAS_NPM_PACKAGES === 'true' ? [
 // The channel is disabled to publish on the default channel: otherwise it
 // defaults to the branch name, which ends up in a "released on @<channel>"
 // label that exceeds GitHub's 50 characters limit.
+// prerelease is explicitly disabled, otherwise @semantic-release/github marks
+// releases from any non-main release branch as prereleases.
 const currentBranch = process.env.GITHUB_REF_NAME || '';
-const hotfixBranches = currentBranch.startsWith('hotfix/') ? [{ name: currentBranch, channel: false }] : [];
+const hotfixBranches = currentBranch.startsWith('hotfix/')
+  ? [{ name: currentBranch, channel: false, prerelease: false }]
+  : [];
 
 module.exports = {
   "branches": [

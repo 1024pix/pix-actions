@@ -24,8 +24,15 @@ const npmPlugin = process.env.HAS_NPM_PACKAGES === 'true' ? [
 // Only the hotfix branch being released is declared: semantic-release allows
 // at most 3 release branches, so matching every remote hotfix/* branch would
 // break releases as soon as a few of them coexist.
+// The channel is disabled to publish on the default channel: otherwise it
+// defaults to the branch name, which ends up in a "released on @<channel>"
+// label that exceeds GitHub's 50 characters limit.
+// prerelease is explicitly disabled, otherwise @semantic-release/github marks
+// releases from any non-main release branch as prereleases.
 const currentBranch = process.env.GITHUB_REF_NAME || '';
-const hotfixBranches = currentBranch.startsWith('hotfix/') ? [currentBranch] : [];
+const hotfixBranches = currentBranch.startsWith('hotfix/')
+  ? [{ name: currentBranch, channel: false, prerelease: false }]
+  : [];
 
 module.exports = {
   "branches": [

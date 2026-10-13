@@ -21,11 +21,17 @@ const npmPlugin = process.env.HAS_NPM_PACKAGES === 'true' ? [
     ]
   ] : [];
 
+// Only the hotfix branch being released is declared: semantic-release allows
+// at most 3 release branches, so matching every remote hotfix/* branch would
+// break releases as soon as a few of them coexist.
+const currentBranch = process.env.GITHUB_REF_NAME || '';
+const hotfixBranches = currentBranch.startsWith('hotfix/') ? [currentBranch] : [];
+
 module.exports = {
   "branches": [
     "main",
     "dev",
-    "hotfix.*"
+    ...hotfixBranches,
   ],
   "plugins": [
     [

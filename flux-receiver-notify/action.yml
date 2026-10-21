@@ -1,0 +1,45 @@
+name: Notify Flux receiver
+description: >-
+  Signe (HMAC-SHA256) et envoie un appel à un Receiver Flux de type generic-hmac,
+  pour relancer immédiatement la réconciliation des objets qu'il cible
+  (ex. le ResourceSetInputProvider des review apps sur un cluster Kubernetes).
+
+os: ubuntu-latest
+
+inputs:
+  webhook-url:
+    required: true
+    description: >-
+      URL complète du Receiver : https://<host>/hook/<sha256(token + nom + namespace)>
+  token:
+    required: true
+    description: >-
+      Token du Receiver (clé `token` du secret référencé par spec.secretRef), utilisé pour signer le corps.
+
+runs:
+  using: composite
+  steps:
+    - name: Notify Flux receiver
+      shell: bash
+      env:
+        WEBHOOK_URL: ${{ inputs.webhook-url }}
+        TOKEN: ${{ inputs.token }}
+        REPOSITORY: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        EVENT_ACTION: ${{ github.event.action }}
+        SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      run: |
+        if [ -z "$WEBHOOK_URL" ] || [ -z "$TOKEN" ]; then
+          echo "::error::webhook-url et token sont requis (secrets FLUX_RECEIVER_WEBHOOK / FLUX_RECEIVER_TOKEN absents ?)"
+          exit 1
+        fi
+        # Le Receiver ne lit le corps que pour vérifier la signature (et pour un éventuel spec.resourceFilter CEL).
+        PAYLOAD=$(jq -cn --arg repository "$REPOSITORY" --arg pr "$PR_NUMBER" --arg action "$EVENT_ACTION" --arg sha "$SHA" \
+          '{repository: $repository, pr: $pr, action: $action, sha: $sha}')
+        # Format attendu par le notification-controller : X-Signature: sha256=<hmac hex du corps>
+        signature=$(printf '%s' "$PAYLOAD" | openssl dgst -sha256 -hmac "$TOKEN" -hex | awk '{print $NF}')
+        curl -fsS --retry 3 -X POST "$WEBHOOK_URL" \
+          -H 'Content-Type: application/json' \
+          -H "X-Signature: sha256=$signature" \
+          -d "$PAYLOAD"
+        echo "## 🔔 Receiver Flux notifié" >> "$GITHUB_STEP_SUMMARY"

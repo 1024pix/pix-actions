@@ -336,3 +336,43 @@ jobs:
       REGISTRY_ENDPOINT: ${{ secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}
       REGISTRY_TOKEN: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}
 ```
+
+## Flux receiver notify
+
+Signe (HMAC-SHA256) et envoie un appel à un [Receiver Flux](https://fluxcd.io/flux/components/notification/receivers/) de type `generic-hmac`, pour que Flux relance immédiatement la réconciliation des objets ciblés au lieu d'attendre son intervalle de polling.
+
+Cas d'usage principal : les review apps déployées par Flux Operator sur nos clusters Kubernetes. Le workflow construit l'image de la PR, puis notifie le Receiver ; le `ResourceSetInputProvider` relit alors les PR et la review app est (re)déployée dans la foulée. Le même appel, à la fermeture de la PR ou au retrait du label, la supprime.
+
+La mise en place côté cluster (Receiver, secrets, ResourceSet) est décrite dans `1024pix/fleet-infra` : le script `scripts/review-app.sh` génère aussi le workflow ci-dessous.
+
+### Utilisation
+
+Secrets à définir sur le dépôt :
+
+- `FLUX_RECEIVER_WEBHOOK` : URL complète du Receiver (`https://<host>/hook/<sha256(token + nom + namespace)>`)
+- `FLUX_RECEIVER_TOKEN` : token du Receiver (clé `token` du secret référencé par le Receiver)
+
+<details>
+  <summary><code>.github/workflows/review-app.yml</code> (extrait)</summary>
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # ... build et push de l'image pr-<numéro>-<sha>
+
+      - uses: 1024pix/pix-actions/flux-receiver-notify@v0
+        with:
+          webhook-url: ${{ secrets.FLUX_RECEIVER_WEBHOOK }}
+          token: ${{ secrets.FLUX_RECEIVER_TOKEN }}
+```
+
+</details>
+
+### Configuration
+
+- `webhook-url` (requis) : URL complète du Receiver
+- `token` (requis) : token servant à signer le corps de la requête (header `X-Signature: sha256=<hmac>`)
+
+Le corps envoyé (dépôt, numéro de PR, action, sha de l'événement) ne sert qu'à la signature : le Receiver n'en lit pas le contenu, sauf si on lui ajoute un `spec.resourceFilter` (expression CEL sur la requête).

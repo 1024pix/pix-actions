@@ -343,7 +343,7 @@ Signe (HMAC-SHA256) et envoie un appel à un [Receiver Flux](https://fluxcd.io/f
 
 Cas d'usage principal : les review apps déployées par Flux Operator sur nos clusters Kubernetes. Le workflow construit l'image de la PR, puis notifie le Receiver ; le `ResourceSetInputProvider` relit alors les PR et la review app est (re)déployée dans la foulée. Le même appel, à la fermeture de la PR ou au retrait du label, la supprime.
 
-La mise en place côté cluster (Receiver, secrets, ResourceSet) est décrite dans `1024pix/fleet-infra` : le script `scripts/review-app.sh` génère aussi le workflow ci-dessous.
+La mise en place côté cluster (Receiver, secrets, ResourceSet) et la génération du workflow ci-dessous sont décrites dans le [README de `1024pix/fleet-infra`](https://github.com/1024pix/fleet-infra#readme).
 
 ### Utilisation
 

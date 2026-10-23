@@ -376,3 +376,44 @@ jobs:
 - `token` (requis) : token servant à signer le corps de la requête (header `X-Signature: sha256=<hmac>`)
 
 Le corps envoyé (dépôt, numéro de PR, action, sha de l'événement) ne sert qu'à la signature : le Receiver n'en lit pas le contenu, sauf si on lui ajoute un `spec.resourceFilter` (expression CEL sur la requête).
+
+## Scaleway registry cleanup
+
+Supprime d'un namespace Scaleway Container Registry les tags d'images d'une PR (par défaut ceux préfixés par `pr-<numéro>-`), via l'[API Scaleway](https://www.scaleway.com/en/developers/api/registry/). Tous les tags correspondants sont supprimés, y compris ceux des pushes précédents.
+
+Cas d'usage principal : le nettoyage des images des review apps à la fermeture ou au merge de la PR, en complément de [Flux receiver notify](#flux-receiver-notify).
+
+### Utilisation
+
+La clé utilisée doit avoir le droit de supprimer des tags (ex. permission `ContainerRegistryFullAccess` sur le projet).
+
+<details>
+  <summary><code>.github/workflows/review-app.yml</code> (extrait)</summary>
+
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled, closed]
+
+jobs:
+  cleanup:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 1024pix/pix-actions/scw-registry-cleanup@v0
+        with:
+          registry-endpoint: ${{ secrets.CONTAINER_REGISTRY_SCW_INFRA_ENDPOINT }}
+          token: ${{ secrets.SCW_CONTAINER_REGISTRY_INFRA_SECRET_KEY }}
+          images: |
+            api
+            front
+```
+
+</details>
+
+### Configuration
+
+- `registry-endpoint` (requis) : endpoint du namespace, `rg.<région>.scw.cloud/<namespace>`
+- `token` (requis) : clé secrète Scaleway
+- `images` (requis) : noms des images à nettoyer, un par ligne (une image introuvable est ignorée avec un warning)
+- `tag-prefix` (optionnel) : préfixe des tags à supprimer, par défaut `pr-<numéro de la PR>-` (obligatoire hors événement `pull_request`)

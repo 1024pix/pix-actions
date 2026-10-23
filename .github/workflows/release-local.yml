@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: 1024pix/pix-actions/release@main
+      - uses: 1024pix/pix-actions/release@481ebcb7bd39fcf913121fa594c6722f9c5f7988 # main
         with:
           updateMajorVersion: true
         env:

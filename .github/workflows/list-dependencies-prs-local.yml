@@ -1,0 +1,16 @@
+name: List hottest dependencies PRs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  list-dependencies-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 1024pix/pix-actions/list-dependencies-prs@main
+        id: list-dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: |
+          echo "${{ steps.list-dependencies.outputs.repositories }}"

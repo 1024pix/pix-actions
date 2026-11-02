@@ -1,0 +1,91 @@
+name: Clean up Scaleway registry tags
+description: >-
+  Supprime d'un registry Scaleway les tags d'images d'une PR (par défaut pr-<numéro>-*),
+  par exemple à la fermeture ou au merge de la PR d'une review app.
+
+os: ubuntu-latest
+
+inputs:
+  registry-endpoint:
+    required: true
+    description: >-
+      Endpoint du namespace Scaleway : rg.<région>.scw.cloud/<namespace>
+  token:
+    required: true
+    description: >-
+      Clé secrète Scaleway ayant le droit de supprimer des tags (ex. ContainerRegistryFullAccess).
+  images:
+    required: true
+    description: >-
+      Noms des images à nettoyer, un par ligne.
+  tag-prefix:
+    required: false
+    description: >-
+      Préfixe des tags à supprimer. Par défaut : pr-<numéro de la PR>-
+
+runs:
+  using: composite
+  steps:
+    - name: Delete registry tags
+      shell: bash
+      env:
+        REGISTRY_ENDPOINT: ${{ inputs.registry-endpoint }}
+        SCW_SECRET_KEY: ${{ inputs.token }}
+        IMAGES: ${{ inputs.images }}
+        TAG_PREFIX: ${{ inputs.tag-prefix || (github.event.pull_request.number && format('pr-{0}-', github.event.pull_request.number)) }}
+      run: |
+        if [ -z "$REGISTRY_ENDPOINT" ] || [ -z "$SCW_SECRET_KEY" ]; then
+          echo "::error::registry-endpoint et token sont requis"
+          exit 1
+        fi
+        if [ -z "$TAG_PREFIX" ]; then
+          echo "::error::tag-prefix est requis en dehors d'un événement pull_request"
+          exit 1
+        fi
+        endpoint=${REGISTRY_ENDPOINT#https://}
+        if [[ ! "$endpoint" =~ ^rg\.([a-z]+-[a-z]+)\.scw\.cloud/([^/]+)/?$ ]]; then
+          echo "::error::registry-endpoint invalide (attendu : rg.<région>.scw.cloud/<namespace>) : $endpoint"
+          exit 1
+        fi
+        region=${BASH_REMATCH[1]}
+        namespace=${BASH_REMATCH[2]}
+        api="https://api.scaleway.com/registry/v1/regions/$region"
+
+        scw_api() {
+          curl -fsS --retry 3 -H "X-Auth-Token: $SCW_SECRET_KEY" "$@"
+        }
+
+        namespace_id=$(scw_api "$api/namespaces?name=$namespace" \
+          | jq -r --arg n "$namespace" '.namespaces[] | select(.name == $n) | .id')
+        if [ -z "$namespace_id" ]; then
+          echo "::error::Namespace $namespace introuvable dans la région $region"
+          exit 1
+        fi
+
+        echo "## 🧹 Tags supprimés (préfixe \`$TAG_PREFIX\`)" >> "$GITHUB_STEP_SUMMARY"
+        while read -r image; do
+          [ -z "$image" ] && continue
+          image_id=$(scw_api "$api/images?namespace_id=$namespace_id&name=$image" \
+            | jq -r --arg n "$image" '.images[] | select(.name == $n) | .id')
+          if [ -z "$image_id" ]; then
+            echo "::warning::Image $image introuvable dans $namespace, ignorée"
+            continue
+          fi
+
+          # Liste complète avant suppression, pour ne pas décaler la pagination.
+          tag_ids=()
+          page=1
+          while :; do
+            tags=$(scw_api "$api/images/$image_id/tags?name=$TAG_PREFIX&page=$page&page_size=100")
+            mapfile -t -O "${#tag_ids[@]}" tag_ids < <(jq -r --arg p "$TAG_PREFIX" '.tags[] | select(.name | startswith($p)) | "\(.id) \(.name)"' <<< "$tags")
+            [ "$(jq '.tags | length' <<< "$tags")" -lt 100 ] && break
+            page=$((page + 1))
+          done
+
+          for tag in "${tag_ids[@]}"; do
+            read -r tag_id tag_name <<< "$tag"
+            scw_api -X DELETE "$api/tags/$tag_id" > /dev/null
+            echo "Supprimé : $image:$tag_name"
+            echo "- \`$image:$tag_name\`" >> "$GITHUB_STEP_SUMMARY"
+          done
+        done <<< "$IMAGES"

@@ -7,7 +7,7 @@ jobs:
   list-dependencies-prs:
     runs-on: ubuntu-latest
     steps:
-      - uses: 1024pix/pix-actions/list-dependencies-prs@main
+      - uses: 1024pix/pix-actions/list-dependencies-prs@44ba0bb3203afb06ac7236c7ada6d46df4df22e8 # main
         id: list-dependencies
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
